@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#192c26">
+        <title>NovaBite Pro | Punto de Venta</title>
+        <link rel="stylesheet" href="estilos.css">
+    </head>
+    <body><a class="skip-link" href="#contenidoPrincipal">Saltar al contenido</a>
+
+        <div class="app">
+
+            <aside class="sidebar">
+                <div class="logo"><span class="brand-icon">n.</span>Nova<span>Bite</span><sup>PRO</sup></div>
+                <p class="logo-sub">TU RESTAURANTE, EN ORDEN</p>
+
+                <p class="nav-label">ESPACIO DE TRABAJO</p><nav class="navegacion" aria-label="Navegación principal">
+                    <button class="nav-btn activo" data-vista="ventas">
+                        <span aria-hidden="true">▦</span> Punto de venta
+                    </button>
+                    <button class="nav-btn" data-vista="historial">
+                        <span aria-hidden="true">▤</span> Pedidos
+                    </button>
+                    <button class="nav-btn" data-vista="inventario">
+                        <span aria-hidden="true">▧</span> Inventario
+                    </button>
+                    <button class="nav-btn" data-vista="reportes">
+                        <span aria-hidden="true">◷</span> Reportes
+                    </button>
+                </nav>
+
+                <div class="sidebar-tip"><span>Hecho para tu ritmo.</span><p>Del primer pedido al último café.</p><b>NovaBite Pro ↗</b></div><div class="sidebar-footer">
+                    <span class="estado-online">● DIEGO ZABALA</span>
+                    <small>PROGRAMACION II</small>
+                </div>
+            </aside>
+
+            <div class="contenido">
+                <header class="topbar">
+                    <div>
+                        <span class="eyebrow">GESTIÓN DEL RESTAURANTE</span><h1 id="tituloVista">Punto de venta</h1>
+                        <p id="fechaActual"></p>
+                    </div>
+                    <div class="usuario">
+                        <span class="avatar">NB</span>
+                        <div>
+                            <strong>Administrador</strong>
+                            <small>Caja principal</small>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="contenidoPrincipal"><div class="workspace-banner"><div><span class="eyebrow">UN BUEN SERVICIO EMPIEZA AQUÍ</span><h2>Todo listo para tomar el siguiente pedido.</h2><p>Elige, personaliza y cobra. Así de fácil.</p></div><span class="service-badge"><i></i> <span id="estadoSistema">Conectando caja…</span></span></div>
+                    <section id="vista-ventas" class="vista activa">
+                        <div class="pos-layout">
+
+                            <div class="panel">
+                                <div class="seccion-header">
+                                    <div>
+                                        <h2>Nuestro menú <span id="contadorProductos" class="count-badge">14</span></h2>
+                                        <p>Un antojo para cada cliente.</p>
+                                    </div>
+                                </div>
+
+                                <div class="campo">
+                                    <input id="buscarProducto" type="search"
+                                           placeholder="Buscar en el menú…" aria-label="Buscar producto" maxlength="100">
+                                </div>
+
+                                <div class="categorias" aria-label="Categorías del menú">
+                                    <button class="categoria activa" data-categoria="todos">
+                                        Todos
+                                    </button>
+                                    <button class="categoria" data-categoria="comida">
+                                        Comidas
+                                    </button>
+                                    <button class="categoria" data-categoria="bebida">
+                                        Bebidas
+                                    </button>
+                                    <button class="categoria" data-categoria="extra">
+                                        Extras
+                                    </button>
+                                </div>
+
+                                <div id="gridProductos" class="productos-grid"></div>
+                            </div>
+
+                            <div class="panel panel-carrito" aria-label="Detalles del pedido">
+                                <div class="seccion-header">
+                                    <div>
+                                        <h2>Nuevo pedido <span id="contadorCarrito" class="count-badge">0</span></h2>
+                                        <p>Personaliza los detalles y confirma la venta.</p>
+                                    </div>
+                                    <button id="vaciarCarrito"
+                                            class="btn-icono" title="Vaciar carrito" aria-label="Vaciar carrito">
+                                        🗑️
+                                    </button>
+                                </div>
+
+                                <div class="campo">
+                                    <label for="nombreCliente">Cliente *</label>
+                                    <input id="nombreCliente" type="text"
+                                           maxlength="100" minlength="2" required autocomplete="name"
+                                           placeholder="¿A nombre de quién?">
+                                </div>
+
+                                <div class="campo">
+                                    <label for="tipoPedido">Tipo de pedido</label>
+                                    <select id="tipoPedido">
+                                        <option value="Local">🍽️ Comer aquí</option>
+                                        <option value="Para llevar">🥡 Para llevar</option>
+                                    </select>
+                                </div>
+
+                                <div id="listaCarrito" class="lista-carrito"></div>
+
+                                <div class="campo">
+                                    <label for="notas">Notas del pedido</label>
+                                    <textarea id="notas" rows="2" maxlength="500"
+                                              placeholder="Indicaciones especiales..."></textarea>
+                                </div>
+
+                                <div class="campo">
+                                    <label for="descuento">Descuento (%)</label>
+                                    <input id="descuento" type="number"
+                                           min="0" max="100" step="1" value="0" required inputmode="numeric">
+                                </div>
+
+                                <div class="campo">
+                                    <label for="metodoPago">Método de pago</label>
+                                    <select id="metodoPago">
+                                        <option value="Efectivo">💵 Efectivo</option>
+                                        <option value="Tarjeta">💳 Tarjeta</option>
+                                    </select>
+                                </div>
+
+                                <div class="campo" id="campoEfectivo">
+                                    <label for="efectivoRecibido">
+                                        Efectivo recibido ($)
+                                    </label>
+                                    <input id="efectivoRecibido"
+                                           type="number" min="0"
+                                           step="0.01" max="10000000" inputmode="decimal" placeholder="0.00">
+                                </div>
+
+                                <div class="totales">
+                                    <div><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+                                    <div><span>Descuento</span><strong id="montoDescuento">$0.00</strong></div>
+                                    <div class="total-final">
+                                        <span>Total</span>
+                                        <strong id="totalFinal">$0.00</strong>
+                                    </div>
+                                    <div id="filaCambio">
+                                        <span>Cambio</span>
+                                        <strong id="cambio">$0.00</strong>
+                                    </div>
+                                </div>
+
+                                <button id="guardarPedido" class="btn-guardar" disabled>
+                                    Confirmar y cobrar ↗
+                                </button>
+
+                                <p class="secure-note">◈ Venta e inventario guardados en este navegador</p><div id="mensajePedido" role="status" aria-live="polite"></div>
+
+                                <button id="descargarFactura"
+                                        class="cssbuttons-io-button" hidden>
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="none" d="M0 0h24v24H0z"/>
+                                    <path fill="currentColor"
+                                          d="M1 14.5a6.496 6.496 0 0 1 3.064-5.519 8.001 8.001 0 0 1 15.872 0 6.5 6.5 0 0 1-2.936 12L7 21c-3.356-.274-6-3.078-6-6.5zm15.848 4.487a4.5 4.5 0 0 0 2.03-8.309l-.807-.503-.12-.942a6.001 6.001 0 0 0-11.903 0l-.12.942-.805.503a4.5 4.5 0 0 0 2.029 8.309l.173.013h9.35l.173-.013zM13 12h3l-4 5-4-5h3V8h2v4z"/>
+                                    </svg>
+                                    <span>Descargar factura PDF</span>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="vista-historial" class="vista">
+                        <div class="panel">
+                            <div class="seccion-header">
+                                <div>
+                                    <h2>📋 Historial de pedidos</h2>
+                                    <p>Consulta y administra tus ventas</p>
+                                </div>
+                                <button id="exportarCSV" class="btn-secundario">
+                                    📥 Exportar CSV
+                                </button>
+                            </div>
+
+                            <div class="filtros">
+                                <input id="buscarPedido" type="search"
+                                       placeholder="Buscar cliente o pedido..." aria-label="Buscar pedido" maxlength="100">
+                                <select id="filtroEstado" aria-label="Filtrar pedidos por estado">
+                                    <option value="todos">Todos los estados</option>
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="Preparando">Preparando</option>
+                                    <option value="Entregado">Entregado</option>
+                                </select>
+                            </div>
+
+                            <div id="listaPedidos"></div>
+
+                            <button id="borrarHistorial" class="btn-peligro">
+                                🗑️ Eliminar todo el historial
+                            </button>
+                        </div>
+                    </section>
+
+                    <section id="vista-inventario" class="vista">
+                        <div class="panel">
+                            <div class="seccion-header">
+                                <div>
+                                    <h2>📦 Control de inventario</h2>
+                                    <p>Existencias disponibles</p>
+                                </div>
+                            </div>
+
+                            <p class="aviso">
+                                El inventario se descuenta automáticamente al vender.
+                                Cada producto representa una unidad de existencia.
+                            </p>
+
+                            <div id="listaInventario"></div>
+                        </div>
+                    </section>
+
+                    <section id="vista-reportes" class="vista">
+                        <div class="estadisticas">
+                            <div class="stat">
+                                <span>💰 Ventas acumuladas</span>
+                                <strong id="reporteVentas">$0.00</strong>
+                            </div>
+                            <div class="stat">
+                                <span>🧾 Pedidos realizados</span>
+                                <strong id="reportePedidos">0</strong>
+                            </div>
+                            <div class="stat">
+                                <span>📈 Ticket promedio</span>
+                                <strong id="reportePromedio">$0.00</strong>
+                            </div>
+                            <div class="stat">
+                                <span>📅 Ventas de hoy</span>
+                                <strong id="reporteHoy">$0.00</strong>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <h2>🏆 Productos más vendidos</h2>
+                            <div id="productosPopulares"></div>
+                        </div>
+                    </section>
+
+                </main>
+            </div>
+        </div>
+
+        <dialog id="confirmacion" aria-labelledby="confirmacionTitulo" aria-describedby="confirmacionTexto"><form method="dialog"><span class="eyebrow">CONFIRMAR ACCIÓN</span><h2 id="confirmacionTitulo">¿Continuar?</h2><p id="confirmacionTexto"></p><div class="dialog-actions"><button value="cancelar" class="btn-secundario" autofocus>Cancelar</button><button value="aceptar" class="btn-peligro">Sí, continuar</button></div></form></dialog><div id="notificacion" class="notificacion"
+             role="status" aria-live="polite"></div>
+
+        <script src="https://unpkg.com/dexie@4.0.11/dist/dexie.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+
+        <script src="programa.js"></script>
+    </body>
+</html>
